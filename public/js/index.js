@@ -12,8 +12,4 @@ socket.on('newMessage' , function(message) {
 	console.log('new message' , message);
 });
 
-socket.emit('createMessage' , {
-		to : 'mridul@gmail.com',
-		body : 'hello billu',
-		createdAt : 123	
-	});
+
