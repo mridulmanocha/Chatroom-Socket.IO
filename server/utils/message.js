@@ -6,6 +6,16 @@ var generateMessage = (from , body ) => {
 	};
 };
 
+var generateLocationMessage = (from , long , lat) => {
+	return {
+		from,
+		url : `http://www.google.com/maps?q=${lat},${long}`
+	};
+};
+	
+
+
 module.exports = {
-	generateMessage
+	generateMessage,
+	generateLocationMessage
 }
