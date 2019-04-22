@@ -22,7 +22,7 @@ io.on('connection' , (socket) => {
 	console.log('user disconnected');
 	});
 
-	socket.emit('newMessage' , generateMessage('Mridul Manocha' , 'Welcomes you to chatroom'));
+	socket.emit('newMessage' , generateMessage('Mridul Manocha' , 'Welcome to my chatroom'));
 
 	socket.broadcast.emit('newMessage' , generateMessage('Admin' , 'New user joined'));
 
