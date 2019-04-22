@@ -51,12 +51,12 @@ xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         var object = JSON.parse(xhr.responseText);
         socket.emit('createLocation' , {
-		longitude : object.lon,
-		latitude : object.lat
+		longitude : object.longitude,
+		latitude : object.latitude
 	});
     }
 }
-xhr.open('GET', 'https://ip-api.com/json', true);
+xhr.open('GET', 'https://ipapi.co/json', true);
 xhr.send(null);
 
 
