@@ -3,11 +3,11 @@ const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
 const https = require('https');
-const request = require('request');
+
 
 const {generateMessage} = require('./utils/message');
 const {generateLocationMessage} = require('./utils/message');
-const {requestapi} = require('./utils/api');
+
 
 const publicPath = path.join(__dirname , '../public');
 const port = process.env.PORT || 3000;
@@ -16,7 +16,7 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
-requestapi();
+
 
 io.on('connection' , (socket) => {
 
