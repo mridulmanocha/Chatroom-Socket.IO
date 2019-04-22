@@ -41,22 +41,41 @@ var locationButton = $('#send-location');
 
 locationButton.on( "click", function() {
 
-if (!navigator.geolocation) {
-	return alert('geolocation not supported.')
-	}
+if (navigator.geolocation) {
+    var location_timeout = setTimeout("geolocFail()", 10000);
 
-	locationButton.attr('disabled' , 'disabled').text('Sending location...');
+    navigator.geolocation.getCurrentPosition(function(position) {
+        clearTimeout(location_timeout);
 
-navigator.geolocation.getCurrentPosition( function (position) {
-	locationButton.removeAttr('disabled').text('Send location');
-	socket.emit('createLocation' , {
+       socket.emit('createLocation' , {
 		longitude : position.coords.longitude,
 		latitude : position.coords.latitude
 	});
- } , function() {
- 		locationButton.removeAttr('disabled').text('Send location');
-		alert('unable to fetch location madarchod.')
-	});
+    }, function(error) {
+        clearTimeout(location_timeout);
+        geolocFail();
+    });
+} else {
+    // Fallback for no geolocation
+    geolocFail();
+}
+
+// if (!navigator.geolocation) {
+// 	return alert('geolocation not supported.')
+// 	}
+
+// 	locationButton.attr('disabled' , 'disabled').text('Sending location...');
+
+// navigator.geolocation.getCurrentPosition( function (position) {
+// 	locationButton.removeAttr('disabled').text('Send location');
+// 	socket.emit('createLocation' , {
+// 		longitude : position.coords.longitude,
+// 		latitude : position.coords.latitude
+// 	});
+//  } , function() {
+//  		locationButton.removeAttr('disabled').text('Send location');
+// 		alert('unable to fetch location madarchod.')
+// 	});
 });
 
 
