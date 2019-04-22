@@ -39,7 +39,7 @@ io.on('connection' , (socket) => {
 
 	
 	socket.on('createLocation' , (coords) => {
-		io.emit('newLocationMessage' , generateLocationMessage('Admin' , coords.longitude , coords.latitude));
+		io.emit('newLocationMessage' , generateLocationMessage('New User' , coords.longitude , coords.latitude));
 	});
 
 });
