@@ -55,7 +55,7 @@ navigator.geolocation.getCurrentPosition( function (position) {
 	});
  } , function() {
  		locationButton.removeAttr('disabled').text('Send location');
-		alert('unable to fetch location.')
+		alert('unable to fetch location madarchod.')
 	});
 });
 
