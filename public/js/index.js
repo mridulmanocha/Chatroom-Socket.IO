@@ -1,3 +1,4 @@
+
 var socket = io();
 
 socket.on('connect' , function() {
@@ -37,46 +38,34 @@ $("#message-form").on("submit",  function(e) {
 });
 
 
+
+
+
 var locationButton = $('#send-location');
+
 
 locationButton.on( "click", function() {
 
-// if (navigator.geolocation) {
-//     var location_timeout = setTimeout("geolocFail()", 10000);
-
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//         clearTimeout(location_timeout);
-
-//        socket.emit('createLocation' , {
-// 		longitude : position.coords.longitude,
-// 		latitude : position.coords.latitude
-// 	});
-//     }, function(error) {
-//         clearTimeout(location_timeout);
-//         geolocFail();
-//     });
-// } else {
-//     // Fallback for no geolocation
-//     geolocFail();
-// }
-
-if (!navigator.geolocation) {
-	return alert('geolocation not supported.')
-	}
-
-	locationButton.attr('disabled' , 'disabled').text('Sending location...');
-
-navigator.geolocation.getCurrentPosition( function (position) {
-	locationButton.removeAttr('disabled').text('Send location');
-	socket.emit('createLocation' , {
-		longitude : position.coords.longitude,
-		latitude : position.coords.latitude
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        var object = JSON.parse(xhr.responseText);
+        socket.emit('createLocation' , {
+		longitude : object.lon,
+		latitude : object.lat
 	});
- } , function() {
- 		locationButton.removeAttr('disabled').text('Send location');
-		alert('unable to fetch location madarchod.')
-	});
+    }
+}
+xhr.open('GET', 'http://ip-api.com/json', true);
+xhr.send(null);
+
+
 });
+
+
+
+
+
 
 
  
