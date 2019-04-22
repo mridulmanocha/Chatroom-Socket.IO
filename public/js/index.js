@@ -56,7 +56,7 @@ xhr.onreadystatechange = function() {
 	});
     }
 }
-xhr.open('GET', 'http://ip-api.com/json', true);
+xhr.open('GET', 'https://ip-api.com/json', true);
 xhr.send(null);
 
 
